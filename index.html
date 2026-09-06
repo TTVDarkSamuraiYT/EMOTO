@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yozma IN10 Tools</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #e9e9e9;
+        color: #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 700px;
+        background: white;
+        padding: 40px 30px;
+        border-radius: 18px;
+        box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    }
+
+    .header {
+        text-align: center;
+        border-bottom: 3px solid #111;
+        padding-bottom: 22px;
+        margin-bottom: 30px;
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 34px;
+        letter-spacing: 1px;
+    }
+
+    .header p {
+        margin: 10px 0 0;
+        color: #666;
+        font-size: 15px;
+    }
+
+    .tools {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .tool {
+        text-decoration: none;
+        color: #111;
+        border: 2px solid #ddd;
+        border-radius: 15px;
+        padding: 28px 20px;
+        text-align: center;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+
+    .tool:hover {
+        border-color: #111;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,.12);
+    }
+
+    .icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+    }
+
+    .tool h2 {
+        margin: 0 0 10px;
+        font-size: 20px;
+    }
+
+    .tool p {
+        margin: 0;
+        color: #666;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+        font-size: 12px;
+        color: #777;
+    }
+
+    @media (max-width: 600px) {
+
+        body {
+            padding: 12px;
+        }
+
+        .container {
+            padding: 28px 18px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+        }
+
+        .tools {
+            grid-template-columns: 1fr;
+        }
+
+        .tool {
+            padding: 24px 18px;
+        }
+
+    }
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🏍️ YOZMA IN10</h1>
+        <p>Tools & Information Center</p>
+    </div>
+
+    <div class="tools">
+
+        <!-- Charging Calculator -->
+        <a href="calculator.html" class="tool">
+
+            <div class="icon">🔋</div>
+
+            <h2>Charging Calculator</h2>
+
+            <p>
+                Calculate charging cost, electricity usage,
+                and estimated charging time for your Yozma IN10.
+            </p>
+
+        </a>
+
+
+        <!-- Specification Sheet -->
+        <a href="specs.html" class="tool">
+
+            <div class="icon">📄</div>
+
+            <h2>Yozma Specs</h2>
+
+            <p>
+                View the Yozma IN10 specification sheet.
+            </p>
+
+        </a>
+
+    </div>
+
+    <div class="footer">
+        YOZMA IN10 • Personal Tools
+    </div>
+
+</div>
+
+</body>
+</html>
