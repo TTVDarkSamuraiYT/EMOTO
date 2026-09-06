@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yozma IN10 Charging Calculator</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin:0; background:#f4f4f7; color:#111; }
+main { max-width:600px; margin:auto; padding:24px 16px 40px; }
+.card { background:white; border-radius:20px; padding:22px; margin:14px 0; box-shadow:0 3px 14px rgba(0,0,0,.08); }
+h1 { margin:0 0 6px; font-size:28px; }
+.sub { color:#666; margin-bottom:20px; }
+label { display:block; font-weight:650; margin:16px 0 7px; }
+input { width:100%; box-sizing:border-box; font-size:20px; padding:14px; border:1px solid #ccc; border-radius:12px; }
+button { width:100%; margin-top:22px; padding:16px; border:0; border-radius:14px; background:#111; color:white; font-size:18px; font-weight:700; }
+.result { font-size:18px; padding:15px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between; gap:15px; }
+.result:last-child { border-bottom:0; }
+.value { font-weight:800; text-align:right; }
+small { color:#666; display:block; line-height:1.4; }
+</style>
+</head>
+<body>
+<main>
+  <h1>🏍️ Yozma IN10 Charging Calculator</h1>
+  <div class="sub">Made specifically for your 48V 23.4Ah Yozma battery and 48V 5A charger.</div>
+
+  <div class="card">
+    <label>Current battery percentage (%)</label>
+    <input id="start" type="number" min="0" max="100" value="20">
+
+    <label>Charge up to (%)</label>
+    <input id="target" type="number" min="0" max="100" value="100">
+
+    <label>Charging station price ($ per kWh)</label>
+    <input id="price" type="number" min="0" step="0.01" value="0.39">
+
+    <button onclick="calculate()">Calculate</button>
+  </div>
+
+  <div class="card">
+    <div class="result"><span>Battery capacity</span><span class="value">1.12 kWh</span></div>
+    <div class="result"><span>Charger maximum input</span><span class="value">0.275 kW</span></div>
+    <div class="result"><span>Battery energy needed</span><span class="value" id="batteryNeeded">—</span></div>
+    <div class="result"><span>Estimated electricity from station</span><span class="value" id="wallEnergy">—</span></div>
+    <div class="result"><span>Estimated charging cost</span><span class="value" id="cost">—</span></div>
+    <div class="result"><span>Estimated charging time</span><span class="value" id="time">—</span></div>
+    <small id="note"></small>
+  </div>
+
+  <div class="card">
+    <b>Quick formulas used:</b><br><br>
+    Battery needed = 1.12 kWh × percentage being added<br><br>
+    Estimated station energy = battery needed × 1.16<br><br>
+    Cost = estimated station energy × $/kWh<br><br>
+    Time = (battery needed ÷ 0.273 kW) × 1.15
+  </div>
+</main>
+
+<script>
+function calculate() {
+  const capacity = 1.12;
+  const chargerKW = 0.273;
+  const start = Math.max(0, Math.min(100, Number(document.getElementById('start').value)));
+  const target = Math.max(0, Math.min(100, Number(document.getElementById('target').value)));
+  const price = Math.max(0, Number(document.getElementById('price').value));
+
+  if (target <= start) {
+    document.getElementById('note').textContent = "Your target percentage must be higher than your current percentage.";
+    ["batteryNeeded","wallEnergy","cost","time"].forEach(id => document.getElementById(id).textContent="—");
+    return;
+  }
+
+  const fraction = (target - start) / 100;
+  const batteryNeeded = capacity * fraction;
+  const wallEnergy = batteryNeeded * 1.16; // rough allowance for charging losses
+  const cost = wallEnergy * price;
+  const hours = (batteryNeeded / chargerKW) * 1.15; // rough allowance for taper/real-world variation
+
+  const h = Math.floor(hours);
+  const m = Math.round((hours - h) * 60);
+
+  document.getElementById('batteryNeeded').textContent = batteryNeeded.toFixed(2) + " kWh";
+  document.getElementById('wallEnergy').textContent = wallEnergy.toFixed(2) + " kWh";
+  document.getElementById('cost').textContent = "$" + cost.toFixed(2);
+  document.getElementById('time').textContent = `${h} hr ${m} min (rough estimate)`;
+  document.getElementById('note').textContent =
+    "These are rough estimates. Charging can slow near full, and actual station billing can vary.";
+}
+calculate();
+</script>
+</body>
+</html>
