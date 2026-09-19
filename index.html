@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101218">
+  <title>Yozma IN 10 — Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="dashboard">
+  <div class="app-shell">
+    <aside class="rail">
+      <a class="rail-brand" href="index.html" aria-label="Yozma dashboard"><span class="mark">Y</span><span>YOZMA<small>IN 10</small></span></a>
+      <nav aria-label="Main navigation">
+        <a class="nav-link" data-nav="dashboard" href="index.html"><span>◈</span> Dashboard</a>
+        <a class="nav-link" data-nav="charging" href="charging.html"><span>ϟ</span> Charging</a>
+        <a class="nav-link" data-nav="tracker" href="ride-tracker.html"><span>⌁</span> Ride tracker</a>
+        <a class="nav-link" data-nav="specs" href="specs.html"><span>▤</span> Specifications</a>
+      </nav>
+      <p class="rail-note"><i></i> Personal dashboard<br><span>Browser-only data</span></p>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><p class="eyebrow">YOUR ELECTRIC RIDE</p><h1>Good to see you.</h1></div><div class="top-status"><b></b> SYSTEM READY</div></header>
+      <section class="welcome-card">
+        <div><p class="eyebrow accent">YOZMA IN 10</p><h2>Plan the ride,<br>then just ride.</h2><p>Charging estimates and your real-world range, all in one simple place.</p></div>
+        <div class="orb-art" aria-hidden="true"><span></span><span></span><strong>ϟ</strong></div>
+      </section>
+      <section class="section-heading"><div><p class="eyebrow">QUICK TOOLS</p><h2>What do you need?</h2></div></section>
+      <div class="tool-grid">
+        <a class="tool-card blue" href="charging.html"><div class="tool-icon">ϟ</div><div><h3>Charging calculator</h3><p>Estimate energy, time, and cost for any battery setup.</p></div><span class="card-arrow">→</span></a>
+        <a class="tool-card green" href="ride-tracker.html"><div class="tool-icon">⌁</div><div><h3>Ride tracker</h3><p>Save rides and learn your average range by mode.</p></div><span class="card-arrow">→</span></a>
+        <a class="tool-card purple" href="specs.html"><div class="tool-icon">▤</div><div><h3>Specifications</h3><p>Open the IN 10 novelty specification sheet.</p></div><span class="card-arrow">→</span></a>
+      </div>
+      <section class="mini-grid">
+        <article class="mini-card"><span class="mini-icon purple-text">◌</span><div><p>RIDE DATA</p><strong id="dashboardRideCount">0 rides saved</strong></div></article>
+        <article class="mini-card"><span class="mini-icon green-text">⌁</span><div><p>TRACKING</p><strong>Modes 1–4</strong></div></article>
+        <article class="mini-card"><span class="mini-icon blue-text">ϟ</span><div><p>CHARGING DEFAULT</p><strong>275 W</strong></div></article>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
