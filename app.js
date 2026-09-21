@@ -10,18 +10,23 @@
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
   }
 
+  function timeText(hours) {
+    const totalMinutes = Math.max(0, Math.round(hours * 60));
+    return `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`;
+  }
+
   if (page === 'charging') {
     const form = $('chargingForm');
     const update = () => {
       const voltage = Number($('batteryVoltage').value), ah = Number($('batteryAh').value);
-      const current = Number($('currentBattery').value), price = Number($('priceKwh').value);
-      if (![voltage, ah, current, price].every(Number.isFinite) || voltage <= 0 || ah <= 0 || current < 0 || current > 100 || price < 0) return;
-      const wh = voltage * ah, kwh = wh / 1000, neededKwh = kwh * (1 - current / 100), wallKwh = neededKwh * 1.15;
+      const current = Number($('currentBattery').value), price = Number($('priceKwh').value), watts = Number($('chargerWatts').value);
+      if (![voltage, ah, current, price, watts].every(Number.isFinite) || voltage <= 0 || ah <= 0 || current < 0 || current > 100 || price < 0 || watts <= 0) return;
+      const wh = voltage * ah, kwh = wh / 1000, neededKwh = kwh * (1 - current / 100), wallKwh = neededKwh * 1.15, hours = wallKwh / (watts / 1000);
       $('energyWh').textContent = `${Math.round(wh).toLocaleString()} Wh`;
       $('energyKwh').textContent = `${kwh.toFixed(2)} kWh stored`;
       $('neededKwh').textContent = `${neededKwh.toFixed(2)} kWh`;
-      $('wallKwh').textContent = `${wallKwh.toFixed(2)} kWh`;
       $('chargeFrom').textContent = current;
+      $('chargeTime').textContent = timeText(hours);
       $('chargeCost').textContent = money(wallKwh * price);
     };
     form.addEventListener('submit', (event) => { event.preventDefault(); update(); });
